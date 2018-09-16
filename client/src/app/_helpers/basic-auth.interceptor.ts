@@ -4,17 +4,17 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class BasicAuthInterceptor implements HttpInterceptor {
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.authdata) {
-            request = request.clone({
-                setHeaders: { 
-                    Authorization: `Basic ${currentUser.authdata}`
+       if (currentUser && currentUser.authdata) {
+           request = request.clone({
+               setHeaders: { 
+                   Authorization: `Basic ${currentUser.authdata}`
                 }
             });
         }
 
         return next.handle(request);
-    }
+}
 }

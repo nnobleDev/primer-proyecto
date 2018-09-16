@@ -12,10 +12,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PanelComponent } from './panel/panel.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
-import { BasicAuthInterceptor} from './_helpers/basic-auth.interceptor';
+//import { BasicAuthInterceptor} from './_helpers/basic-auth.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { AuthGuard } from './_guards/auth.guard';
+import { JwtInterceptor} from './_helpers/jwt.interceptor';
 const routes: Routes=[
   {path:'', component: InicioComponent, pathMatch:'full'},
   {path:'articulos', component: ArticulosComponent},
@@ -51,7 +52,8 @@ const routes: Routes=[
     RouterModule.forRoot(routes)
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

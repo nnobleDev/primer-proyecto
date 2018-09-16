@@ -53,10 +53,12 @@ router.post('/signin', function(req, res){
                 {
                    expiresIn: '2h'
                 });
+                console.log(res.body);
              return res.status(200).json({
                 email: user.email,
                 token: JWTToken
              });
+             
           }
           return res.status(401).json({
              failed: 'Sin autorizacion'
